@@ -39,7 +39,22 @@
             opacity: 0;
             animation: float 6s ease-in-out infinite;
         }
-        
+               @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
         
         .container {
             width: 100%;
@@ -282,6 +297,45 @@
             }
             isMusicPlaying = !isMusicPlaying;
         });
+        
+    </head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="message animate__animated animate__fadeIn">
+        <h1 class="animate__animated animate__heartBeat">FOR YOU, CUTIE ❤️</h1>
+        <p class="subtext">A special place just for you...</p>
+        <button onclick="enterSite()" class="animate__animated animate__pulse animate__infinite">ENTER</button>
+    </div>
+
+    <script>
+        function enterSite() {
+            // Add exit animation before redirect
+            document.querySelector('.message').classList.add('animate__fadeOut');
+            setTimeout(() => {
+                window.location.href = "main.html";
+            }, 800);
+        }
+        
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const colors = ['#ff6b6b', '#ff8e8e', '#ff4757', '#ffa502', '#ff6b81'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        createHearts();
     </script>
 </body>
 </html>
