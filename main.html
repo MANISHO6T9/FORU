@@ -20,21 +20,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'sans-serif', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #ffeef8 100%);
             transition: background 1s ease;
             position: relative;
         }
         
-        .bg-overlay {
+          .hearts {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
             z-index: 0;
         }
+        
+        .heart {
+            position: absolute;
+            opacity: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
         
         .container {
             width: 100%;
@@ -178,7 +183,7 @@
     
     <div class="container animate__animated animate__fadeIn">
         <div class="title">
-            <h1>Hope you will like this😺</h1>
+            <h1>😺🤍</h1>
             <p>KEEP SMILING CUTIEE..🤍🥹</p>
         </div>
         
