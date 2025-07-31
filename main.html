@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just For You ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #ff8e8e;
+            --accent: #ff4757;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffeef8 100%);
+            transition: background 1s ease;
+            position: relative;
+        }
+        
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .title {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .title h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .title p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .slideshow-container {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            perspective: 1000px;
+        }
+        
+        .slideshow {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform-style: preserve-3d;
+            transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0) scale(1) rotateY(0deg);
+            z-index: 10;
+        }
+        
+        .slide.next {
+            opacity: 0.8;
+            transform: translateX(30%) scale(0.9) rotateY(-10deg);
+            z-index: 5;
+        }
+        
+        .slide.prev {
+            opacity: 0.8;
+            transform: translateX(-30%) scale(0.9) rotateY(10deg);
+            z-index: 5;
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .music-control i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .floating-text {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            text-align: center;
+            width: 100%;
+            animation: floatUp 5s ease-in-out infinite;
+        }
+        
+        @keyframes floatUp {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* Particles effect */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="bg-overlay"></div>
+    
+    <div class="container animate__animated animate__fadeIn">
+        <div class="title">
+            <h1>Just For You</h1>
+            <p>Every moment with you is special...</p>
+        </div>
+        
+        <div class="slideshow-container">
+            <div class="slideshow">
+                <div class="slide active" style="background-image: url('photo1.jpg');"></div>
+                <div class="slide next" style="background-image: url('photo2.jpg');"></div>
+                <div class="slide" style="background-image: url('photo3.jpg');"></div>
+                <div class="slide" style="background-image: url('photo4.jpg');"></div>
+                <div class="slide" style="background-image: url('photo5.jpg');"></div>
+                <div class="slide prev" style="background-image: url('photo6.jpg');"></div>
+            </div>
+        </div>
+        
+        <p class="floating-text">Made with ❤️ for someone special</p>
+    </div>
+    
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <audio id="bgMusic" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+        
+        // Slideshow functionality
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        let isPlaying = true;
+        let slideInterval = setInterval(nextSlide, 4000);
+        
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        function goToSlide(n) {
+            // Reset all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'next', 'prev');
+            });
+            
+            // Calculate new slide positions
+            currentSlide = (n + slides.length) % slides.length;
+            let nextSlideIndex = (currentSlide + 1) % slides.length;
+            let prevSlideIndex = (currentSlide - 1 + slides.length) % slides.length;
+            
+            // Apply classes
+            slides[currentSlide].classList.add('active');
+            slides[nextSlideIndex].classList.add('next');
+            slides[prevSlideIndex].classList.add('prev');
+        }
+        
+        // Music control
+        const bgMusic = document.getElementById('bgMusic');
+        const musicControl = document.getElementById('musicControl');
+        let isMusicPlaying = false;
+        
+        // Autoplay music with user interaction
+        document.body.addEventListener('click', function() {
+            if (!isMusicPlaying) {
+                bgMusic.play();
+                isMusicPlaying = true;
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+        }, { once: true });
+        
+        musicControl.addEventListener('click', function() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicControl.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                bgMusic.play();
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+    </script>
+</body>
+</html>
